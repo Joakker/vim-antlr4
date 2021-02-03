@@ -2,67 +2,51 @@ if exists('b:current_syntax')
     finish
 endif
 
-let main_syntax = 'antlr4'
+command -nargs=* HiLink highlight link <args>
 
+syntax match antlr4ParName      +\<[a-z][a-zA-Z0-9]*\>+
+syntax match antlr4LexName      +\<[A-Z][a-zA-Z0-9]*\>+
+syntax match antlr4Assign       +[a-zA-Z]\+=+
 
-syntax keyword antlr4Keyword    locals throws catch finally mode options tokens
-syntax keyword antlr4Keyword    fragment nextgroup=antlr4LexRuleName
-syntax keyword antlr4Keyword    returns nextgroup=antlr4Embedded
-syntax keyword antlr4Keyword    lexer parser  grammar import containedin=antlr4IdenLine
-
-syntax keyword antlr4Function   skip channel pushState popState contained
-
-if !exists('antlr4_embedded')
-    let antlr4_embedded = 'java'
+if exists('g:antlr4_highlight_punctuation')
+    syntax match antlr4Punctuation     +[\-():;]+
 endif
 
-execute 'syntax include @included syntax/' . antlr4_embedded . '.vim'
-syntax region antlr4Embedded start="{" end="}" keepend containedin=antlr4RuleRHS contains=@included,antlr4LocalReference
-syntax region antlr4Embedded    start="\[" end="\]" contains=@included keepend
-syntax region antlr4String      start=/'/ end=/'/ contains=antlr4Escape
-syntax region antlr4DocComment  start=/\/\*\*/ end=/\*\//
-syntax region antlr4Comment     start="//" end="$" keepend
-syntax region antlr4SetString   start=/\[/ end=/\]/ contained containedin=antlr4RuleRHS
-            \ contains=antlr4Escape,antlr4SetStringEscape
+syntax match antlr4Repeat       +[+*]+
+syntax match antlr4Condition    +?+
+syntax match antlr4Option       +|+
+syntax match antlr4Escape       +\\[nrvt]+ contained
 
-syntax region antlr4RuleRHS     start=':' end=';' contains=antlr4ParRuleName,
-            \ antlr4LexRuleName,antlr4Embedded,antlr4Operator,antlr4String,
-            \ antlr4SetString,antlr4Function,antlr4Annotation
-syntax region antlr4IdenLine    start='\v\zs^\ze(lexer|parser|grammar)' end=';'
+syntax keyword antlr4Keyword grammar
+syntax keyword antlr4Keyword lexer parser options header
+syntax keyword antlr4Keyword fragment
 
-syntax match antlr4Escape           /\v\\(n|t|r|u[0-9a-fA-F]{4})/ contained
-syntax match antlr4SetStringEscape  /\v\\-/                 contained
-syntax match antlr4Operator         /\v[+?*]/               contained
-syntax match antlr4ParRuleName      /\v[a-z][a-zA-Z0-9]*/   contained
-syntax match antlr4LexRuleName      /\v[A-Z][a-zA-Z0-9]*/   contained
-syntax match antlr4GrammarName      /\v[[:alnum:]]+/        containedin=antlr4IdenLine
-syntax match antlr4Annotation       /<.*>/                  contained
-syntax match antlr4Arrow            /->/                    contained
-            \ nextgroup=antlr4Function
-syntax match antlr4Additional       /\v\@(members|header)/ nextgroup=antlr4Embedded
-syntax match antlr4Additional       /\v\@(lexer|parser)::(members|header)/ nextgroup=antlr4Embedded
-syntax match antlr4LocalReference   /\v\$[[:alpha:]][[:alnum:]]*/ containedin=ALL
+syntax keyword antlr4Import import
 
-syntax match antlr4ParRuleNameI     /\v^[a-z][a-zA-Z0-9]*/
-syntax match antlr4LexRuleNameI     /\v^[A-Z][a-zA-Z0-9]*/
+syntax region antlr4Set     start=+\[+  end=+\]+
+syntax region antlr4Attr    start="<"   end=">"
+syntax region antlr4String  start=+'+   end=+'+ contains=antlr4Escape
 
-highlight link antlr4String             String
-highlight link antlr4SetString          Delimiter
-highlight link antlr4Escape             Special
-highlight link antlr4SetStringEscape    Special
-highlight link antlr4DocComment         Comment
-highlight link antlr4GrammarName        Statement
-highlight link antlr4Operator           Operator
-highlight link antlr4ParRuleName        Type
-highlight link antlr4LexRuleName        Define
-highlight link antlr4ParRuleNameI       antlr4ParRuleName
-highlight link antlr4LexRuleNameI       antlr4LexRuleName
-highlight link antlr4Annotation         Special
-highlight link antlr4Function           Function
-highlight link antlr4Keyword            Keyword
-highlight link antlr4Arrow              Operator
-highlight link antlr4Additional         Keyword
-highlight link antlr4LocalReference     Special
-highlight link antlr4Comment            Comment
+syntax region antlr4Comment start=+/\*+ end=+\*/+
+syntax region antlr4Comment start=+//+  end=+$+
+
+HiLink antlr4Comment        Comment
+HiLink antlr4Keyword        KeyWord
+HiLink antlr4ParName        Type
+HiLink antlr4LexName        Macro
+HiLink antlr4Attr           Special
+HiLink antlr4Assign         Statement
+HiLink antlr4Set            Character
+HiLink antlr4String         String
+if exists('g:antlr4_highlight_punctuation')
+    HiLink antlr4Punctuation    Operator
+endif
+HiLink antlr4Repeat         Repeat
+HiLink antlr4Condition      Conditional
+HiLink antlr4Option         Delimiter
+HiLink antlr4Import         PreProc
+HiLink antlr4Escape         Special
+
+delcommand HiLink
 
 let b:current_syntax = 'antlr4'
