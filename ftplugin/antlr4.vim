@@ -13,3 +13,5 @@ endfunction
 
 nnoremap <silent><buffer> <Plug>(antlr4-build)  :call <SID>build_grammar()<CR>
 nnoremap <silent><buffer> <Plug>(antlr4-run)    :call <SID>run_grammar()<CR>
+
+setl commentstring=//\ %s
