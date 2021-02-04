@@ -38,9 +38,11 @@ HiLink antlr4Attr           Special
 HiLink antlr4Assign         Statement
 HiLink antlr4Set            Character
 HiLink antlr4String         String
+
 if exists('g:antlr4_highlight_punctuation')
     HiLink antlr4Punctuation    Operator
 endif
+
 HiLink antlr4Repeat         Repeat
 HiLink antlr4Condition      Conditional
 HiLink antlr4Option         Delimiter
