@@ -1,0 +1,59 @@
+*antlr4.txt*  A plugin for (neo)vim to give antlr4 functionality
+
+__     ___                   _          _   _      _  _         ~
+\ \   / (_)_ __ ___         / \   _ __ | |_| |_ __| || |        ~
+ \ \ / /| | '_ ` _ \ _____ / _ \ | '_ \| __| | '__| || |_       ~
+  \ V / | | | | | | |_____/ ___ \| | | | |_| | |  |__   _|      ~
+   \_/  |_|_| |_| |_|    /_/   \_\_| |_|\__|_|_|     |_|        ~
+
+==============================================================================
+CONTENTS                                                             *antlr4*
+
+
+==============================================================================
+
+X. Prerequisites
+
+To use this plugin to it's fullest, you obviously need to have antlr4
+installed on your machine. If you don't, you can easily download it from the
+official website at `https://www.antlr.org/` and following the instructions
+for your platform.
+
+==============================================================================
+
+X. Configuration                                              *antlr4-config*
+
+*g:antlr4_default_options*                              Default: ''
+
+Add the text in this variable to the invocations of the Antlr tool.
+
+*g:antlr4_embedded_language*                            Default: 'Java'
+
+Generate sources for this language, and embed the syntax of this language onto
+grammars.
+
+*g:antlr4_highlight_all*                                Default: 0
+
+When enabled, implies all of the following.
+
+*g:antlr4_highlight_punctuation*                        Default: 0
+
+When enabled, highlight the symbols ':', '(', ')', ';', '-'.
+
+*g:antlr4_highlight_operators*                          Default: 1
+
+When enabled, highlight the '*', '+', '?' operators.
+
+==============================================================================
+
+X. Mappings                                                 *antlr4-mappings*
+
+*<Plug>(antlr4-build)*
+
+Build the current file.
+
+*<Plug>(antlr4-run)*
+
+Run the current grammar through the test rig.
+
+vim:ft=help:tw=78
