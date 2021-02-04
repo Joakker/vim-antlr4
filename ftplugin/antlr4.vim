@@ -11,6 +11,10 @@ function s:run_grammar() abort
     execute 'silent !java org.antlr4.v4.gui.TestRig'
 endfunction
 
+if !exists('g:antlr4_embedded_language')
+    let g:antlr4_embedded_language = 'Java'
+endif
+
 nnoremap <silent><buffer> <Plug>(antlr4-build)  :call <SID>build_grammar()<CR>
 nnoremap <silent><buffer> <Plug>(antlr4-run)    :call <SID>run_grammar()<CR>
 
