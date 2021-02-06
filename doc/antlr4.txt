@@ -9,10 +9,13 @@ __     ___                   _          _   _      _  _         ~
 ==============================================================================
 CONTENTS                                                             *antlr4*
 
+    1. Prerequisites ................................. |antlr4-prerequisites|
+    2. Configuration ................................. |antlr4-config|
+    3. Mappings ...................................... |antlr4-mappings|
 
 ==============================================================================
 
-X. Prerequisites
+1. Prerequisites                                       *antlr4-prerequisites*
 
 To use this plugin to it's fullest, you obviously need to have antlr4
 installed on your machine. If you don't, you can easily download it from the
@@ -21,7 +24,7 @@ for your platform.
 
 ==============================================================================
 
-X. Configuration                                              *antlr4-config*
+2. Configuration                                              *antlr4-config*
 
 *g:antlr4_embedded_language*                            Default: 'Java'
 
@@ -46,7 +49,7 @@ When enabled, highlight the '*', '+', '?' operators.
 
 ==============================================================================
 
-X. Mappings                                                 *antlr4-mappings*
+3. Mappings                                                 *antlr4-mappings*
 
 *<Plug>(antlr4-build)*
 
