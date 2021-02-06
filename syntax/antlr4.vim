@@ -12,6 +12,10 @@ if exists('g:antlr4_highlight_punctuation')
     syntax match antlr4Punctuation     +[\-():;]+
 endif
 
+syntax include @included syntax/java.vim
+
+syntax region antlr4Embed   start=+{+   end=+}?\?+ contains=@included keepend
+
 syntax match antlr4Repeat       +[+*]+
 syntax match antlr4Condition    +?+
 syntax match antlr4Option       +|+
@@ -26,7 +30,6 @@ syntax keyword antlr4Keyword returns
 syntax keyword antlr4Import import
 
 syntax region antlr4Set     start=+\[+  end=+\]+ contains=antlr4Escape,antlr4SetEscape
-syntax region antlr4Embed   start=+{+   end=+}?\?+
 syntax region antlr4Attr    start="<"   end=">"
 syntax region antlr4String  start=+'+   end=+'+ contains=antlr4Escape
 
