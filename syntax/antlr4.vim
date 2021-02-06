@@ -4,9 +4,9 @@ endif
 
 command -nargs=* HiLink highlight link <args>
 
-syntax match antlr4ParName      +\<[a-z][a-zA-Z0-9_]*\>+
-syntax match antlr4LexName      +\<[A-Z][a-zA-Z0-9_]*\>+
-syntax match antlr4Assign       +[a-zA-Z]\+=+
+syntax match antlr4ParName      +\<[a-z][a-zA-Z0-9_]*\>+ containedin=antlr4RHS
+syntax match antlr4LexName      +\<[A-Z][a-zA-Z0-9_]*\>+ containedin=antlr4RHS
+syntax match antlr4Assign       +[a-zA-Z]\+=+            containedin=antlr4RHS
 
 if exists('g:antlr4_highlight_punctuation')
     syntax match antlr4Punctuation     +[\-():;]+
@@ -14,13 +14,18 @@ endif
 
 syntax include @included syntax/java.vim
 
-syntax region antlr4Embed   start=+{+   end=+}?\?+ contains=@included keepend
+syntax region antlr4RHS     start=+:+   end=+;+ extend
 
-syntax match antlr4Repeat       +[+*]+
-syntax match antlr4Condition    +?+
-syntax match antlr4Option       +|+
-syntax match antlr4Escape       +\\[nrvt]+ contained
-syntax match antlr4SetEscape    +\\-+
+syntax region antlr4Embed   start=+{+   end=+}?\?+ contains=@included keepend
+    \ containedin=antlr4RHS
+syntax region antlr4Embed   start=+\[+  end=+\]+   contains=@included keepend
+
+
+syntax match antlr4Repeat       +[+*]+      containedin=antlr4RHS
+syntax match antlr4Condition    +?+         containedin=antlr4RHS
+syntax match antlr4Option       "|"         containedin=antlr4RHS
+syntax match antlr4Escape       +\\[nrvt]+  containedin=antlr4RHS
+syntax match antlr4SetEscape    +\\-+       containedin=antlr4RHS
 
 syntax keyword antlr4Keyword grammar
 syntax keyword antlr4Keyword lexer parser options header
@@ -30,10 +35,13 @@ syntax keyword antlr4Keyword returns
 syntax keyword antlr4Import import
 
 syntax keyword antlr4Operation skip more popMode mode pushMode type channel
+    \ containedin=antlr4RHS
 
-syntax region antlr4Set     start=+\[+  end=+\]+ contains=antlr4Escape,antlr4SetEscape
+syntax region antlr4Set     start=+\[+  end=+\]+ contained
+    \ contains=antlr4Escape,antlr4SetEscape containedin=antlr4RHS
 syntax region antlr4Attr    start="<"   end=">"
-syntax region antlr4String  start=+'+   end=+'+ contains=antlr4Escape
+    \ containedin=antlr4RHS
+syntax region antlr4String  start=+'+   end=+'+ containedin=antlr4RHS contains=antlr4Escape
 
 syntax region antlr4Comment start=+/\*+ end=+\*/+
 syntax region antlr4Comment start=+//+  end=+$+

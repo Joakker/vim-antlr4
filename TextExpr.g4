@@ -13,7 +13,7 @@ expr returns [int i]: '(' expr ')'
     | expr op=('*'|'/') expr
     | a=expr '=' b=expr
     | NUMBER
-    | { true }? ID
+    | { true }? ID { true }
     ;
 
 NUMBER  : DIGIT+ ('.' DIGIT+)?      ;
