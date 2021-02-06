@@ -35,8 +35,8 @@ syntax match antlr4SetEscape    +\\-+       containedin=antlr4RHS
 
 syntax keyword antlr4Keyword grammar
 syntax keyword antlr4Keyword lexer parser options header
-syntax keyword antlr4Keyword fragment
-syntax keyword antlr4Keyword returns local
+syntax keyword antlr4Keyword fragment tokens
+syntax keyword antlr4Keyword returns locals throws catch finally mode options
 
 syntax keyword antlr4Import import
 
