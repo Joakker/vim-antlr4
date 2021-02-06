@@ -23,14 +23,14 @@ for your platform.
 
 X. Configuration                                              *antlr4-config*
 
-*g:antlr4_default_options*                              Default: ''
-
-Add the text in this variable to the invocations of the Antlr tool.
-
 *g:antlr4_embedded_language*                            Default: 'Java'
 
 Generate sources for this language, and embed the syntax of this language onto
 grammars.
+
+*g:antlr4_tool_options*                                 Default: []
+
+Append these options to the invocations of the Antlr tool.
 
 *g:antlr4_highlight_all*                                Default: 0
 
