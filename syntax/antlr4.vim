@@ -4,6 +4,7 @@ endif
 
 command -nargs=* HiLink highlight link <args>
 
+syntax match antlr4EventId      +[a-zA-Z_][a-zA-Z0-9_]*+ contained
 syntax match antlr4ParName      +\<[a-z][a-zA-Z0-9_]*\>+ containedin=antlr4RHS
 syntax match antlr4LexName      +\<[A-Z][a-zA-Z0-9_]*\>+ containedin=antlr4RHS
 syntax match antlr4Assign       +[a-zA-Z]\+=+            containedin=antlr4RHS
@@ -24,13 +25,18 @@ syntax region antlr4Embed   start=+\[+  end=+\]+   contains=@included keepend
 syntax match antlr4Repeat       +[+*]+      containedin=antlr4RHS
 syntax match antlr4Condition    +?+         containedin=antlr4RHS
 syntax match antlr4Option       "|"         containedin=antlr4RHS
-syntax match antlr4Escape       +\\[nrvt]+  containedin=antlr4RHS
+
+syntax match antlr4Escape       +\\[nrvt]+
+syntax match antlr4Escape       +\\u[0-9a-fA-F]\{4}+
+syntax match antlr4Escape       +\\u{[0-9a-fA-F]\{4}}+
+syntax match antlr4Escape       +\\p{.\{-}}+
+
 syntax match antlr4SetEscape    +\\-+       containedin=antlr4RHS
 
 syntax keyword antlr4Keyword grammar
 syntax keyword antlr4Keyword lexer parser options header
 syntax keyword antlr4Keyword fragment
-syntax keyword antlr4Keyword returns
+syntax keyword antlr4Keyword returns local
 
 syntax keyword antlr4Import import
 
@@ -44,7 +50,12 @@ syntax region antlr4Attr    start="<"   end=">"
 syntax region antlr4String  start=+'+   end=+'+ containedin=antlr4RHS contains=antlr4Escape
 
 syntax region antlr4Comment start=+/\*+ end=+\*/+
+    \ containedin=antlr4RHS
 syntax region antlr4Comment start=+//+  end=+$+
+    \ containedin=antlr4RHS
+
+syntax region antlr4Event   start=+#+   end=+$+
+    \ containedin=antlr4RHS contains=antlr4EventId
 
 HiLink antlr4Comment        Comment
 HiLink antlr4Keyword        KeyWord
@@ -66,6 +77,7 @@ HiLink antlr4Import         PreProc
 HiLink antlr4Escape         Special
 HiLink antlr4SetEscape      antlr4Escape
 HiLink antlr4Operation      Function
+HiLink antlr4EventId        Function
 
 delcommand HiLink
 
