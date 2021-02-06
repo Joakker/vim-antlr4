@@ -19,5 +19,6 @@ expr returns [int i]: '(' expr ')'
 NUMBER  : DIGIT+ ('.' DIGIT+)?      ;
 ID      : [a-zA-Z] [a-zA-Z0-9\-]*   ;
 NL      : '\r'? '\n'                ;
+WS      : [ \t] -> skip             ;
 
 fragment DIGIT: [0-9];

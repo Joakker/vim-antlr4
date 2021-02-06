@@ -29,6 +29,8 @@ syntax keyword antlr4Keyword returns
 
 syntax keyword antlr4Import import
 
+syntax keyword antlr4Operation skip more popMode mode pushMode type channel
+
 syntax region antlr4Set     start=+\[+  end=+\]+ contains=antlr4Escape,antlr4SetEscape
 syntax region antlr4Attr    start="<"   end=">"
 syntax region antlr4String  start=+'+   end=+'+ contains=antlr4Escape
@@ -55,6 +57,7 @@ HiLink antlr4Option         Delimiter
 HiLink antlr4Import         PreProc
 HiLink antlr4Escape         Special
 HiLink antlr4SetEscape      antlr4Escape
+HiLink antlr4Operation      Function
 
 delcommand HiLink
 
