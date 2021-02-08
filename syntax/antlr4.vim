@@ -7,7 +7,7 @@ command -nargs=* HiLink highlight link <args>
 syntax match antlr4EventId      +[a-zA-Z_][a-zA-Z0-9_]*+ contained
 syntax match antlr4ParName      +\<[a-z][a-zA-Z0-9_]*\>+ containedin=antlr4RHS
 syntax match antlr4LexName      +\<[A-Z][a-zA-Z0-9_]*\>+ containedin=antlr4RHS
-syntax match antlr4Assign       +[a-zA-Z]\+=+            containedin=antlr4RHS
+syntax match antlr4Assign       /[a-zA-Z]\++\?=/         containedin=antlr4RHS
 
 if exists('g:antlr4_highlight_punctuation')
     syntax match antlr4Punctuation     +[\-():;]+
