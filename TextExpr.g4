@@ -3,17 +3,24 @@
 */
 grammar TestExpr;
 
+@lexer::header {
+package com.github.joakker;
+}
+
 input:
     ( expr NL )*
     ;
 
-expr returns [int i]: '(' expr ')'
+expr
+@after { System.out.println("Did expression"); }
+returns [int i]
+    : '(' expr ')'
     | <assoc=right> expr '^' expr
     | expr op=('+'|'-') expr
     | expr op=('*'|'/') expr
     | a=expr '=' b=expr
     | NUMBER
-    | { true }? ID { true }         # A
+    | { true }? ID { System.out.println($i); }         # A
     ;
 
 NUMBER  : DIGIT+ ('.' DIGIT+)?      ;

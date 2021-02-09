@@ -17,14 +17,21 @@ syntax include @included syntax/java.vim
 
 syntax region antlr4RHS     start=+:+   end=+;+ extend
 
-syntax region antlr4Embed   start=+{+   end=+}?\?+ contains=@included keepend
+syntax region antlr4Embed   start=+{+   end=+}?\?+ contains=@included,antlr4Variable keepend
     \ containedin=antlr4RHS
-syntax region antlr4Embed   start=+\[+  end=+\]+   contains=@included keepend
+syntax region antlr4Embed   start=+\[+  end=+\]+   contains=@included,antlr4Variable keepend
 
 
 syntax match antlr4Repeat       +[+*]+      containedin=antlr4RHS
 syntax match antlr4Condition    +?+         containedin=antlr4RHS
 syntax match antlr4Option       "|"         containedin=antlr4RHS
+
+" Use specifically containedin=javaParenT so it will be highlighted inside
+" parens
+syntax match antlr4Variable  contained   +\$[a-zA-Z_][a-zA-Z0-9_]*+ containedin=javaParenT
+
+syntax match antlr4Keyword      /@\(\(parser\|lexer\)::\)\?\(header\|members\)/
+syntax match antlr4Keyword      /@after/
 
 syntax match antlr4Escape       +\\[nrvt]+
 syntax match antlr4Escape       +\\u[0-9a-fA-F]\{4}+
@@ -34,7 +41,7 @@ syntax match antlr4Escape       +\\p{.\{-}}+
 syntax match antlr4SetEscape    +\\-+       containedin=antlr4RHS
 
 syntax keyword antlr4Keyword grammar
-syntax keyword antlr4Keyword lexer parser options header
+syntax keyword antlr4Keyword lexer parser options
 syntax keyword antlr4Keyword fragment tokens
 syntax keyword antlr4Keyword returns locals throws catch finally mode options
 
@@ -78,6 +85,8 @@ HiLink antlr4Escape         Special
 HiLink antlr4SetEscape      antlr4Escape
 HiLink antlr4Operation      Function
 HiLink antlr4EventId        Function
+HiLink antlr4Annotation     KeyWord
+HiLink antlr4Variable       Special
 
 delcommand HiLink
 
