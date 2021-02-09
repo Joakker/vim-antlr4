@@ -3,6 +3,8 @@
 */
 grammar TestExpr;
 
+import Something;
+
 @lexer::header {
 package com.github.joakker;
 }
